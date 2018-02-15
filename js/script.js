@@ -87,8 +87,7 @@ function calculator() {
   };
 
   this.displayCalc = function() {
-    var temp = "<div class = \"calcScreen\">" + calcScreen + "</div>";
-    temp += "<div class = \"equation\">" + equation() + calcScreen + " : Equation</div>";
+    var temp = "";
     for (var i = 0; i < buttons.length; i++) {
       temp += "<div class=\"Myrow\">";
       for (var j = 0; j < buttons[i].length; j++) {
