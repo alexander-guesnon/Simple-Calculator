@@ -2,7 +2,7 @@
 TODO: create upper and lower limits so you dont loose acuracy (get the squear root of the max number)
 TODO: create title for calculator
 TODO: click animation
-
+TODO: put negitive  mode
 User Story: I can add, subtract, multiply and divide two numbers.
 User Story: I can clear the input field with a clear button.
 User Story: I can keep chaining mathematical operations together until I hit the equal button, and the calculator will tell me the correct output.
@@ -24,7 +24,7 @@ function calculator() {
     ["7", "8", "9", "*"],
     ["4", "5", "6", "-"],
     ["1", "2", "3", "+"],
-    ["0", ".", "=", "+"]
+    ["0", ".", "=", "-/+"]
   ];
 
 
@@ -163,6 +163,16 @@ function calculator() {
         calcScreen += userInput;
         updateScreen(calcScreen);
         break;
+
+        case "-/+":
+          if(calcScreen[0] === "-"){
+            calcScreen=calcScreen.slice(1,calcScreen.length);
+            updateScreen(calcScreen);
+            break;
+          }
+          calcScreen  = "-" + calcScreen;
+          updateScreen(calcScreen);
+          break;
 
       case "=":
         stack.push(calcScreen);
