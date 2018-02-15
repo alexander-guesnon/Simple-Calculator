@@ -14,6 +14,7 @@ User Story: I can keep chaining mathematical operations together until I hit the
 */
 
 function calculator() {
+
   var calcScreen = "0";
   var stack = []; // put all opeartionos on the stack to make it easy to pop out things to do;
   var buttons = [
@@ -29,12 +30,45 @@ function calculator() {
   }
 
   function calculateStack() {
-    if (stack == []) {
-      return; // do nothing
+    console.log(stack);
+    if ( stack.length == 1) {
+      stack = [];
+      return;
     }
+    var tempNumber = stack.pop();
+    var tempSign = stack.pop();
+    var tempSecondNumber = stack.pop();
+    var tempCalc = 0;
+
+    while (true) {
+      console.log(stack);
+      if (tempSign === "+") {
+        tempCalc =  Number(tempNumber) + Number(tempSecondNumber);
+        console.log(tempCalc);
+      } else if (tempSign === "-") {
+        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
+      } else if (tempSign === "*") {
+        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
+      } else if (tempSign === "/") {
+        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
+      } else if (tempSign === "%") {
+        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
+      }
+
+      if (stack.length  > 0) {
+        tempSign = stack.pop();
+        tempNumber = stack.pop();
+        tempSecondNumber = String(tempCalc);
+      }else{
+        break;
+      }
+    }
+    calcScreen = String(tempCalc);
+    updateScreen(calcScreen);
     // TODO: zero out stack after calc
     // TODO: check if stack is outo order
     // TODO: add final result to calcScreen and update
+    // TODO: error if zero
   }
 
   this.getCalcScreen = function() {
@@ -144,7 +178,6 @@ function calculator() {
       case "=":
         stack.push(calcScreen);
         calculateStack();
-        console.log(stack);
         //TODO: clear stack after =
         break;
 
