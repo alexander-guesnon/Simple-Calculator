@@ -1,13 +1,3 @@
-/*
-TODO: create upper and lower limits so you dont loose acuracy (get the squear root of the max number)
-TODO: create title for calculator
-TODO: click animation
-TODO: put negitive  mode
-User Story: I can add, subtract, multiply and divide two numbers.
-User Story: I can clear the input field with a clear button.
-User Story: I can keep chaining mathematical operations together until I hit the equal button, and the calculator will tell me the correct output.
-*/
-
 function calculator() {
 
   var calcScreen = "0";
@@ -30,7 +20,7 @@ function calculator() {
 
   function updateScreen(data) {
     $(".calcScreen").text(data);
-    $(".equation").text(equation() + calcScreen + ": Equation");
+    $(".equation").text(equation() + calcScreen + " : Equation");
   }
 
   function calculateStack() {
