@@ -23,6 +23,19 @@ function calculator() {
     ["1", "2", "3", "+"],
     ["0", ".", "=", "+"]
   ];
+  // TODO: create regex function toe check for /+-%*/
+  function updateScreen(data) {
+    $(".calcScreen").text(data);
+  }
+
+  function calculateStack() {
+    if (stack == []) {
+      return; // do nothing
+    }
+    // TODO: zero out stack after calc
+    // TODO: check if stack is outo order
+    // TODO: add final result to calcScreen and update
+  }
 
   this.getCalcScreen = function() {
     return calcScreen;
@@ -60,18 +73,6 @@ function calculator() {
     $("body").append(temp);
   };
 
-  function updateScreen(data) {
-    $(".calcScreen").text(data);
-  }
-
-function calculateStack (){
-    if( stack == []){
-      return; // do nothing
-    }
-    // TODO: zero out stack after calc
-    // TODO: check if stack is outo order
-  }
-
   this.handleUserInput = function(userInput) {
     var regexNum = /\d/g;
     var regexDecimal = /\./g;
@@ -87,49 +88,51 @@ function calculateStack (){
     }
     // TODO: prevent stack from getting out of order
     switch (userInput) {
-      case "AC":// clear both memory and screen
+      case "AC": // clear both memory and screen
         calcScreen = "0";
         updateScreen(calcScreen);
         break;
       case "CE": // clear dispay to zero but keep memory
         calcScreen = "0";
         updateScreen(calcScreen);
-        stack.push(calcScreen);
-        calcScreen = "0";
-        updateScreen(calcScreen);
-        stack.push("+");
+        stack = [];
         break;
-      case "%":// 10 % 2 = 0.2 ( (1/10) * 2)
+
+      case "%": // 10 % 2 = 0.2 ( (1/10) * 2)
         stack.push(calcScreen);
         calcScreen = "0";
         updateScreen(calcScreen);
         stack.push("%");
         break;
+
       case "/":
         stack.push(calcScreen);
         calcScreen = "0";
         updateScreen(calcScreen);
         stack.push("/");
         break;
+
       case "*":
         stack.push(calcScreen);
         calcScreen = "0";
         updateScreen(calcScreen);
         stack.push("*");
         break;
+
       case "-":
         stack.push(calcScreen);
         calcScreen = "0";
         updateScreen(calcScreen);
         stack.push("-");
         break;
+
       case "+":
         stack.push(calcScreen);
         calcScreen = "0";
         updateScreen(calcScreen);
         stack.push("+");
-
         break;
+
       case ".":
         if (regexDecimal.test(calcScreen)) {
           break;
@@ -137,11 +140,14 @@ function calculateStack (){
         calcScreen += userInput;
         updateScreen(calcScreen);
         break;
+
       case "=":
-      //TODO: create function to calculate the stack
-        calculateStack ();
+        stack.push(calcScreen);
+        calculateStack();
         console.log(stack);
+        //TODO: clear stack after =
         break;
+
       default:
         $(".calcScreen").text("ERROR");
         calcScreen = 0;
