@@ -10,6 +10,13 @@ function calculator() {
 
   var calcScreen = "0";
   var stack = [];
+  var equation = function(){
+    var temp = "";
+    for (var i = 0; i < stack.length; i++) {
+      temp += stack[i];
+    }
+    return temp;
+  };
   var buttons = [
     ["AC", "CE", "%", "/"],
     ["7", "8", "9", "*"],
@@ -18,13 +25,10 @@ function calculator() {
     ["0", ".", "=", "+"]
   ];
 
-  function updateEquation() {
-
-  }
 
   function updateScreen(data) {
     $(".calcScreen").text(data);
-    console.log(temp);
+    $(".equation").text(equation()+calcScreen+": Equation");
   }
 
   function calculateStack() {
@@ -65,7 +69,6 @@ function calculator() {
       }
     }
     calcScreen = String(tempCalc);
-    //TODO: print stack
     updateScreen(calcScreen);
   }
 
@@ -87,9 +90,9 @@ function calculator() {
     temp += "<div class = \"calcScreen\">" + calcScreen + "</div>";
     temp += "</div>";
     temp += "</div>";
-    var temp = "<div class=\"row\">";
+    temp += "<div class=\"row\">";
     temp += "<div class=\"col\">";
-    temp += "<div class = \"equation\">" + calcScreen + "</div>";
+    temp += "<div class = \"equation\">" + equation() +calcScreen+ " : Equation</div>";
     temp += "</div>";
     temp += "</div>";
 
@@ -126,11 +129,11 @@ function calculator() {
     switch (userInput) {
       case "AC": // clear both stack and screen
         calcScreen = "0";
+        stack = [];
         updateScreen(calcScreen);
         break;
       case "CE": // clear dispay to zero but keep memory
         calcScreen = "0";
-        stack = [];
         updateScreen(calcScreen);
         break;
 
