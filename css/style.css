@@ -18,6 +18,16 @@ body {
 .screen{
 	background-color: #063647;
 }
+
+.AC{
+	background-color: #A55C55;
+	color: white;
+}
+
+.CE{
+	background-color: #A55C55;
+	color: white;
+}
 h1 {
   text-align: center;
   color: #458985;
