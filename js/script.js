@@ -1,5 +1,6 @@
 /*
-TODO: create upper and lower limits so you dont loose acuracy
+TODO: create upper and lower limits so you dont loose acuracy (get the squear root of the max number)
+TODO: negitive sign
 User Story: I can add, subtract, multiply and divide two numbers.
 User Story: I can clear the input field with a clear button.
 User Story: I can keep chaining mathematical operations together until I hit the equal button, and the calculator will tell me the correct output.
@@ -8,7 +9,7 @@ User Story: I can keep chaining mathematical operations together until I hit the
 function calculator() {
 
   var calcScreen = "0";
-  var stack = []; // put all opeartionos on the stack to make it easy to pop out things to do;
+  var stack = [];
   var buttons = [
     ["AC", "CE", "%", "/"],
     ["7", "8", "9", "*"],
@@ -16,7 +17,6 @@ function calculator() {
     ["1", "2", "3", "+"],
     ["0", ".", "=", "+"]
   ];
-  // TODO: create regex function toe check for /+-%*/
   function updateScreen(data) {
     $(".calcScreen").text(data);
   }
@@ -39,6 +39,12 @@ function calculator() {
       } else if (tempSign === "*") {
         tempCalc = Number(tempNumber) * Number(tempSecondNumber);
       } else if (tempSign === "/") {
+        if(Number(tempSecondNumber) === 0){
+          updateScreen("ERROR");
+          calcScreen = "0";
+          stack = [];
+          return;
+        }
         tempCalc = Number(tempNumber) / Number(tempSecondNumber);
       } else if (tempSign === "%") {
         tempCalc = ( 1 / Number(tempNumber)) * Number(tempSecondNumber);
@@ -54,10 +60,6 @@ function calculator() {
     }
     calcScreen = String(tempCalc);
     updateScreen(calcScreen);
-    // TODO: zero out stack after calc
-    // TODO: check if stack is outo order
-    // TODO: add final result to calcScreen and update
-    // TODO: error if zero
   }
 
   this.getCalcScreen = function() {
@@ -109,9 +111,8 @@ function calculator() {
       }
       return;
     }
-    // TODO: prevent stack from getting out of order
     switch (userInput) {
-      case "AC": // clear both memory and screen
+      case "AC": // clear both stack and screen
         calcScreen = "0";
         updateScreen(calcScreen);
         break;
@@ -121,7 +122,7 @@ function calculator() {
         stack = [];
         break;
 
-      case "%": // 10 % 2 = 0.2 ( (1/10) * 2)
+      case "%":
         stack.push(calcScreen);
         calcScreen = "0";
         updateScreen(calcScreen);
@@ -169,7 +170,7 @@ function calculator() {
         calculateStack();
         break;
       default:
-        $(".calcScreen").text("ERROR");
+        updateScreen("ERROR");
         calcScreen = 0;
 
     }
