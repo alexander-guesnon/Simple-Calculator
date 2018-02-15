@@ -60,59 +60,87 @@ function calculator() {
     $("body").append(temp);
   };
 
-  this.updateScreen = function(data) {
+  function updateScreen(data) {
     $(".calcScreen").text(data);
-  };
+  }
 
-  this.calculate = function(userInput) {
+function calculateStack (){
+    if( stack == []){
+      return; // do nothing
+    }
+    // TODO: zero out stack after calc
+    // TODO: check if stack is outo order
+  }
+
+  this.handleUserInput = function(userInput) {
     var regexNum = /\d/g;
     var regexDecimal = /\./g;
     if (regexNum.test(userInput)) { //stack numbers
       if (calcScreen === "0") {
         calcScreen = userInput;
-        this.updateScreen(calcScreen);
+        updateScreen(calcScreen);
       } else {
         calcScreen += userInput; // append number  to screen
-        this.updateScreen(calcScreen);
+        updateScreen(calcScreen);
       }
       return;
     }
+    // TODO: prevent stack from getting out of order
     switch (userInput) {
-      case "AC":
-        console.log("AC"); // clear both memory and screen
+      case "AC":// clear both memory and screen
         calcScreen = "0";
-        this.updateScreen(calcScreen);
+        updateScreen(calcScreen);
         break;
-      case "CE":
-        console.log("CE"); // clear dispay to zero but keep memory
+      case "CE": // clear dispay to zero but keep memory
         calcScreen = "0";
-        this.updateScreen(calcScreen);
+        updateScreen(calcScreen);
+        stack.push(calcScreen);
+        calcScreen = "0";
+        updateScreen(calcScreen);
+        stack.push("+");
         break;
-      case "%":
-        console.log("%"); // 10 % 2 = 0.2 ( (1/10) * 2)
+      case "%":// 10 % 2 = 0.2 ( (1/10) * 2)
+        stack.push(calcScreen);
+        calcScreen = "0";
+        updateScreen(calcScreen);
+        stack.push("%");
         break;
       case "/":
-        console.log("/");
+        stack.push(calcScreen);
+        calcScreen = "0";
+        updateScreen(calcScreen);
+        stack.push("/");
         break;
       case "*":
-        console.log("*");
+        stack.push(calcScreen);
+        calcScreen = "0";
+        updateScreen(calcScreen);
+        stack.push("*");
         break;
       case "-":
-        console.log("-");
+        stack.push(calcScreen);
+        calcScreen = "0";
+        updateScreen(calcScreen);
+        stack.push("-");
         break;
       case "+":
-        console.log("+");
+        stack.push(calcScreen);
+        calcScreen = "0";
+        updateScreen(calcScreen);
+        stack.push("+");
+
         break;
       case ".":
         if (regexDecimal.test(calcScreen)) {
           break;
         }
         calcScreen += userInput;
-        this.updateScreen(calcScreen);
+        updateScreen(calcScreen);
         break;
       case "=":
-      //check to see if a + - / * % was pressed
-        console.log("=");
+      //TODO: create function to calculate the stack
+        calculateStack ();
+        console.log(stack);
         break;
       default:
         $(".calcScreen").text("ERROR");
@@ -128,6 +156,6 @@ var calc = new calculator();
 $(document).ready(function() {
   calc.displayCalc();
   $("button").click(function() {
-    calc.calculate($(this).attr("class"));
+    calc.handleUserInput($(this).attr("class"));
   });
 });
