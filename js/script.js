@@ -1,6 +1,6 @@
 /*
 TODO: create upper and lower limits so you dont loose acuracy (get the squear root of the max number)
-TODO: negitive sign
+TODO: display current stack on screen.
 User Story: I can add, subtract, multiply and divide two numbers.
 User Story: I can clear the input field with a clear button.
 User Story: I can keep chaining mathematical operations together until I hit the equal button, and the calculator will tell me the correct output.
@@ -17,12 +17,18 @@ function calculator() {
     ["1", "2", "3", "+"],
     ["0", ".", "=", "+"]
   ];
+
+  function updateEquation() {
+
+  }
+
   function updateScreen(data) {
     $(".calcScreen").text(data);
+    console.log(temp);
   }
 
   function calculateStack() {
-    if ( stack.length == 1) {
+    if (stack.length == 1) {
       stack = [];
       return;
     }
@@ -33,32 +39,33 @@ function calculator() {
 
     while (true) {
       if (tempSign === "+") {
-        tempCalc =  Number(tempNumber) + Number(tempSecondNumber);
+        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
       } else if (tempSign === "-") {
         tempCalc = Number(tempNumber) - Number(tempSecondNumber);
       } else if (tempSign === "*") {
         tempCalc = Number(tempNumber) * Number(tempSecondNumber);
       } else if (tempSign === "/") {
-        if(Number(tempSecondNumber) === 0){
-          updateScreen("ERROR");
+        if (Number(tempSecondNumber) === 0) {
           calcScreen = "0";
           stack = [];
+          updateScreen("ERROR");
           return;
         }
         tempCalc = Number(tempNumber) / Number(tempSecondNumber);
       } else if (tempSign === "%") {
-        tempCalc = ( 1 / Number(tempNumber)) * Number(tempSecondNumber);
+        tempCalc = (1 / Number(tempNumber)) * Number(tempSecondNumber);
       }
 
-      if (stack.length  > 0) {
+      if (stack.length > 0) {
         tempSign = stack.pop();
         tempNumber = stack.pop();
         tempSecondNumber = String(tempCalc);
-      }else{
+      } else {
         break;
       }
     }
     calcScreen = String(tempCalc);
+    //TODO: print stack
     updateScreen(calcScreen);
   }
 
@@ -78,6 +85,11 @@ function calculator() {
     var temp = "<div class=\"row\">";
     temp += "<div class=\"col\">";
     temp += "<div class = \"calcScreen\">" + calcScreen + "</div>";
+    temp += "</div>";
+    temp += "</div>";
+    var temp = "<div class=\"row\">";
+    temp += "<div class=\"col\">";
+    temp += "<div class = \"equation\">" + calcScreen + "</div>";
     temp += "</div>";
     temp += "</div>";
 
@@ -118,43 +130,43 @@ function calculator() {
         break;
       case "CE": // clear dispay to zero but keep memory
         calcScreen = "0";
-        updateScreen(calcScreen);
         stack = [];
+        updateScreen(calcScreen);
         break;
 
       case "%":
         stack.push(calcScreen);
         calcScreen = "0";
-        updateScreen(calcScreen);
         stack.push("%");
+        updateScreen(calcScreen);
         break;
 
       case "/":
         stack.push(calcScreen);
         calcScreen = "0";
-        updateScreen(calcScreen);
         stack.push("/");
+        updateScreen(calcScreen);
         break;
 
       case "*":
         stack.push(calcScreen);
         calcScreen = "0";
-        updateScreen(calcScreen);
         stack.push("*");
+        updateScreen(calcScreen);
         break;
 
       case "-":
         stack.push(calcScreen);
         calcScreen = "0";
-        updateScreen(calcScreen);
         stack.push("-");
+        updateScreen(calcScreen);
         break;
 
       case "+":
         stack.push(calcScreen);
         calcScreen = "0";
-        updateScreen(calcScreen);
         stack.push("+");
+        updateScreen(calcScreen);
         break;
 
       case ".":
@@ -170,8 +182,8 @@ function calculator() {
         calculateStack();
         break;
       default:
-        updateScreen("ERROR");
         calcScreen = 0;
+        updateScreen("ERROR");
 
     }
   };
