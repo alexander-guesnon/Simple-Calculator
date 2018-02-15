@@ -1,13 +1,5 @@
 /*
-TODO: setup user input for add, subtract, multiply and divide two input
-TODO: make a function that will clear the screen
-TODO: make a function that chains all the equations together. like (1+1=x x+2=y)
-TODO: turn calculator to object
-TODO: get usder input user input needs to indicate what button its frome
-TODO: make switch statment for userinput
-TODO: look up string to number mpanipulation (mabey you can append numbers to a string and then convert to number)
 TODO: create upper and lower limits so you dont loose acuracy
-TODO: implemnt stack with calculator push and pop on array
 User Story: I can add, subtract, multiply and divide two numbers.
 User Story: I can clear the input field with a clear button.
 User Story: I can keep chaining mathematical operations together until I hit the equal button, and the calculator will tell me the correct output.
@@ -30,29 +22,26 @@ function calculator() {
   }
 
   function calculateStack() {
-    console.log(stack);
     if ( stack.length == 1) {
       stack = [];
       return;
     }
-    var tempNumber = stack.pop();
-    var tempSign = stack.pop();
     var tempSecondNumber = stack.pop();
+    var tempSign = stack.pop();
+    var tempNumber = stack.pop();
     var tempCalc = 0;
 
     while (true) {
-      console.log(stack);
       if (tempSign === "+") {
         tempCalc =  Number(tempNumber) + Number(tempSecondNumber);
-        console.log(tempCalc);
       } else if (tempSign === "-") {
-        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
+        tempCalc = Number(tempNumber) - Number(tempSecondNumber);
       } else if (tempSign === "*") {
-        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
+        tempCalc = Number(tempNumber) * Number(tempSecondNumber);
       } else if (tempSign === "/") {
-        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
+        tempCalc = Number(tempNumber) / Number(tempSecondNumber);
       } else if (tempSign === "%") {
-        tempCalc = Number(tempNumber) + Number(tempSecondNumber);
+        tempCalc = ( 1 / Number(tempNumber)) * Number(tempSecondNumber);
       }
 
       if (stack.length  > 0) {
@@ -178,9 +167,7 @@ function calculator() {
       case "=":
         stack.push(calcScreen);
         calculateStack();
-        //TODO: clear stack after =
         break;
-
       default:
         $(".calcScreen").text("ERROR");
         calcScreen = 0;
