@@ -1,6 +1,6 @@
 # JavaScript Calculator
 
-[JavaScript Calculator](https://alexander-guesnon.github.io/JavaScript Calculator) is a website that simulates a calculator. I made this for a freeCodeCamp challenge (Build a JavaScript Calculator).
+[I'm an inline-style link](https://www.google.com) is a website that simulates a calculator. I made this for a freeCodeCamp challenge (Build a JavaScript Calculator).
 
 ## Outline
 
