@@ -98,12 +98,11 @@ function calculator() {
       temp += "</div>";
     }
 
-    $("body").append(temp);
+    $(".calculator").append(temp);
   };
 
   this.handleUserInput = function(userInput) {
     var regexNum = /\d/g;
-    var regexDecimal = /\./g;
     if (regexNum.test(userInput)) { //stack numbers
       if (calcScreen === "0") {
         calcScreen = userInput;
@@ -161,9 +160,6 @@ function calculator() {
         break;
 
       case ".":
-        if (regexDecimal.test(calcScreen)) {
-          break;
-        }
         calcScreen += userInput;
         updateScreen(calcScreen);
         break;
