@@ -1,6 +1,8 @@
 /*
 TODO: create upper and lower limits so you dont loose acuracy (get the squear root of the max number)
-TODO: display current stack on screen.
+TODO: create title for calculator
+TODO: click animation
+
 User Story: I can add, subtract, multiply and divide two numbers.
 User Story: I can clear the input field with a clear button.
 User Story: I can keep chaining mathematical operations together until I hit the equal button, and the calculator will tell me the correct output.
@@ -10,7 +12,7 @@ function calculator() {
 
   var calcScreen = "0";
   var stack = [];
-  var equation = function(){
+  var equation = function() {
     var temp = "";
     for (var i = 0; i < stack.length; i++) {
       temp += stack[i];
@@ -28,7 +30,7 @@ function calculator() {
 
   function updateScreen(data) {
     $(".calcScreen").text(data);
-    $(".equation").text(equation()+calcScreen+": Equation");
+    $(".equation").text(equation() + calcScreen + ": Equation");
   }
 
   function calculateStack() {
@@ -85,27 +87,14 @@ function calculator() {
   };
 
   this.displayCalc = function() {
-    var temp = "<div class=\"row\">";
-    temp += "<div class=\"col\">";
-    temp += "<div class = \"calcScreen\">" + calcScreen + "</div>";
-    temp += "</div>";
-    temp += "</div>";
-    temp += "<div class=\"row\">";
-    temp += "<div class=\"col\">";
-    temp += "<div class = \"equation\">" + equation() +calcScreen+ " : Equation</div>";
-    temp += "</div>";
-    temp += "</div>";
-
+    var temp = "<div class = \"calcScreen\">" + calcScreen + "</div>";
+    temp += "<div class = \"equation\">" + equation() + calcScreen + " : Equation</div>";
     for (var i = 0; i < buttons.length; i++) {
-      temp += "<div class=\"row\">";
+      temp += "<div class=\"Myrow\">";
       for (var j = 0; j < buttons[i].length; j++) {
-
-        temp += "<div class=\"col\">";
         temp += "<button class=\"" + buttons[i][j] + "\" >";
         temp += buttons[i][j];
         temp += "</button>";
-        temp += "</div>";
-
       }
       temp += "</div>";
     }

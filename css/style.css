@@ -2,13 +2,13 @@ body{
 background: white;
 }
 h1 {
-		text-align: center;
 }
 .calcScreen {
 font-size: 50px;
-text-align: center;
 }
 .equation{
 	font-size: 25px;
-	text-align: right;
+}
+.Myrow{
+display: block;
 }
